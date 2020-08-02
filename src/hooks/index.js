@@ -43,7 +43,6 @@ export const useTasks = selectedProject => {
     });
     return () => unsubscribe();
   }, [selectedProject]);
-  console.log(tasks);
   return { tasks, archivedTasks };
 };
 
@@ -53,7 +52,7 @@ export const useProjects = () => {
     firebase
       .firestore()
       .collection("projects")
-      .where("userId", "==", "jlIFXIwyAL3tzHMtzRbw")
+      .where("userId", "==", "tarang369666")
       .orderBy("projectId")
       .get()
       .then(snapshot => {
