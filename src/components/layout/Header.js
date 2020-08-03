@@ -1,19 +1,29 @@
-import React from "react";
-import { FaPizzaSlice } from "react-icons/fa";
-export const Header = () => {
+import React, { useState } from 'react';
+import { FaPizzaSlice } from 'react-icons/fa';
+export const Header = ({ darkMode, setDarkMode }) => {
+  const [shouldShowMain, setShouldShowMain] = useState(false);
+  const [showQuickAddTask, setShowQuickAddTask] = useState(false);
+
   return (
-    <header className="header" data-test-id="header">
+    <header className='header' data-test-id='header'>
       <nav>
-        <div className="logo">
-          <img src="/images/logo.png" alt="Todoist" />
+        <div className='logo'>
+          <img src='/images/logo.png' alt='Todoist' />
         </div>
-        <div className="settings">
+        <div className='settings'>
           <ul>
-            <li data-test-id="quick-add-task-action" className="settings__add">
+            <li data-test-id='quick-add-task-action' className='settings__add'>
               +
             </li>
-            <li data-test-id="dark-mode-action" className="settings__darkmode">
-              <FaPizzaSlice />
+            <li className='settings__darkmode'>
+              <button
+                data-testid='dark-mode-action'
+                aria-label='Darkmode on/off'
+                type='button'
+                onClick={() => setDarkMode(!darkMode)}
+              >
+                <FaPizzaSlice />
+              </button>
             </li>
           </ul>
         </div>
