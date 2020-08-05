@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { FaTrashAlt } from "react-icons/fa";
-import { useProjectsValue, useSelectedProjectValue } from "../context";
-import { firebase } from "../firebase";
+import React, { useState } from 'react';
+import { FaTrashAlt } from 'react-icons/fa';
+import { useProjectsValue, useSelectedProjectValue } from '../context';
+import { firebase } from '../firebase';
 
 export const IndividualProject = ({ project }) => {
   const [showConfirm, setShowConfirm] = useState(false);
@@ -10,32 +10,34 @@ export const IndividualProject = ({ project }) => {
   const deleteProject = docId => {
     firebase
       .firestore()
-      .collection("projects")
+      .collection('projects')
       .doc(docId)
       .delete()
       .then(() => {
         setProjects([...projects]);
-        setSelectedProject("INBOX");
+        setSelectedProject('INBOX');
       });
   };
   return (
     <>
-      <span className="sidebar__dot">•</span>
-      <span className="sidebar__project-name">{project.name}</span>
+      <span className='sidebar__dot'>•</span>
+      <span className='sidebar__project-name'>{project.name}</span>
       <span
-        className="sidebar__project-delete"
-        data-testid="delete-project"
-        // role="button"
-        // tabIndex={0}
+        className='sidebar__project-delete'
+        data-testid='delete-project'
         onClick={() => setShowConfirm(!showConfirm)}
+        onKeyDown={() => setShowConfirm(!showConfirm)}
+        tabIndex={0}
+        role='button'
+        aria-label='Confirm deletionof project'
       >
         <FaTrashAlt />
         {showConfirm && (
-          <div className="project-delete-modal">
-            <div className="project-delete-modal__inner">
+          <div className='project-delete-modal'>
+            <div className='project-delete-modal__inner'>
               <p>Are you sure you want to Delete Project?</p>
               <button
-                type="button"
+                type='button'
                 onClick={() => deleteProject(project.docId)}
               >
                 Delete
@@ -43,10 +45,10 @@ export const IndividualProject = ({ project }) => {
               <span
                 onClick={() => setShowConfirm(!showConfirm)}
                 onKeyDown={e => {
-                  if (e.key === "Enter") setShowConfirm(!showConfirm);
+                  if (e.key === 'Enter') setShowConfirm(!showConfirm);
                 }}
-                role="button"
-                aria-label="Cancel adding project, do not delete"
+                role='button'
+                aria-label='Cancel adding project, do not delete'
               >
                 Cancel
               </span>

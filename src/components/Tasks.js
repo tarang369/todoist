@@ -4,7 +4,7 @@ import { useTasks } from '../hooks';
 import { collatedTasks } from '../constants';
 import { getTitle, getCollatedTitle, collatedTasksExist } from '../helpers';
 import { useProjectsValue, useSelectedProjectValue } from '../context';
-import { AddTask } from './Addtask';
+import { AddTask } from './AddTask';
 
 export const Tasks = () => {
   const { selectedProject } = useSelectedProjectValue();
@@ -33,7 +33,7 @@ export const Tasks = () => {
       <ul className='tasks__list'>
         {tasks.map(task => (
           <li key={`${task.id}`}>
-            <CheckBox id={task.id} />
+            <CheckBox id={task.id} taskDesc={task.task} />
             <span>{task.task}</span>
           </li>
         ))}
